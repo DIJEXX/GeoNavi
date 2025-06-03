@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoNavi</title>
+    <link rel="stylesheet" href="./src/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.spin/1.1.0/spin.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.spin/1.1.0/spin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.spin/1.1.0/leaflet.spin.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script type="text/javascript" src="https://api-maps.yandex.ru/2.1/?lang=ru-RU"></script>
+	<script src="https://unpkg.com/leaflet-yandex@1.0.1/dist/leaflet-yandex.js"></script>
+</head>
+<body>
+   <div id="map"></div>
+    
+    <div class="search-panel">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Поиск места...">
+            <button class="expand-btn" id="expandBtn">≡</button>
+        </div>
+    </div>
+    
+    <div class="customControl" id="sidePanel">
+        <div class="closeButton" id="closePanel"></div>
+        <div class="panel-tabs">
+            <button class="tab-btn active" data-tab="search">Поиск</button>
+            <button class="tab-btn" data-tab="routing">Маршруты</button>
+            <button class="tab-btn" data-tab="themes">Темы</button>
+        </div>
+        
+        <div class="tab-content active" id="searchTab">
+            <div class="radius-control">
+                <label>Радиус поиска (км):</label>
+                <input type="number" min="1" max="15000" value="5" class="radius-input" id="radiusInput">
+            </div>
+            <div class="search-results" id="searchResults"></div>
+            <div class="place-info" id="placeInfo" style="display: none;">
+                <button class="back-to-results" id="backToResults">← Вернуться к результатам</button>
+                <h4 id="placeName"></h4>
+                <p id="placeAddress"></p>
+                <p>Координаты: <span id="placeCoords"></span></p>
+                <button class="action-btn" id="copyCoords">Копировать координаты</button>
+                <button class="action-btn" id="addToRouteFrom">Установить как точку отправления</button>
+                <button class="action-btn" id="addToRouteTo">Установить как точку назначения</button>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="routingTab">
+            <div class="route-controls">
+                <div class="route-point">
+                    <label>Откуда:</label>
+                    <input type="text" id="routeFrom" placeholder="Нач. точка или клик на карте">
+                </div>
+                <div class="route-point">
+                    <label>Куда:</label>
+                    <input type="text" id="routeTo" placeholder="Конеч. точка или клик на карте">
+                </div>
+                <div class="via-points" id="viaPoints">
+                    <label>Через:</label>
+                    <button id="addViaPoint" class="action-btn">+ Добавить промежуточную точку</button>
+                </div>
+                <button class="action-btn" id="calculateRoute">Построить маршрут</button>
+                <div class="route-info" id="routeInfo">
+                    <div id="routeSummary"></div>
+                    <div class="route-steps" id="routeSteps"></div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content" id="themesTab">
+            <div class="radius-control">
+                <label>Радиус поиска (км):</label>
+                <input type="number" min="1" max="50" value="5" class="radius-input" id="themeRadius">
+            </div>
+            <div class="theme-buttons" id="themeButtons"></div>
+            <div class="add-theme-container">
+                <button class="action-btn" id="addThemeBtn">Добавить свой вариант</button>
+                <div class="add-theme-form" id="addThemeForm" style="display: none;">
+                    <input type="text" id="themeName" placeholder="Название темы">
+                    <textarea id="themeGeoJSON" placeholder="GeoJSON данные"></textarea>
+                    <button class="action-btn" id="submitTheme">Подтвердить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="./src/Yandex.js"></script>
+    <script src="./src/main.js"></script>
+    <script src="./src/Search.js"></script>
+    <script src="./src/Routing.js"></script>
+    <script src="./src/Themes.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.js"></script>
+</body>
+</html>
